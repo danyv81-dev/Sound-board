@@ -84,38 +84,70 @@ function playSound(sound, btn) {
         audio.pause();
     }
     
-    // Set up and play new sound
-    audio.src = sound.url;
-    audio.volume = masterVolume / 100;
-    
     // Update UI immediately
     btn.classList.add('playing');
     currentlyPlaying = { sound, id: btn.id };
     document.getElementById('playingName').textContent = `Now Playing: ${sound.name}`;
     nowPlaying.classList.remove('hidden');
     
-    // Try to play with better error handling
-    const playPromise = audio.play();
-    
-    if (playPromise !== undefined) {
-        playPromise
-            .then(() => {
-                console.log('Playing: ' + sound.name);
-            })
-            .catch(err => {
-                console.log('Playback error:', err);
-                // Keep UI updated even if sound fails to load
-                btn.style.opacity = '0.7';
-            });
+    // Try to play external audio first
+    if (sound.url && sound.url.includes('http')) {
+        audio.src = sound.url;
+        audio.volume = masterVolume / 100;
+        
+        const playPromise = audio.play();
+        
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log('Playing: ' + sound.name);
+                })
+                .catch(err => {
+                    console.log('External audio failed, generating sound effect');
+                    playGeneratedSound(sound.name, btn);
+                });
+        }
+        
+        // Remove playing class when audio ends
+        audio.onended = () => {
+            btn.classList.remove('playing');
+            currentlyPlaying = null;
+            nowPlaying.classList.add('hidden');
+        };
+    } else {
+        // Use generated sound
+        playGeneratedSound(sound.name, btn);
+    }
+}
+
+// Play generated sound effect
+function playGeneratedSound(soundName, btn) {
+    if (!audioGen) {
+        initAudioGenerator();
     }
     
-    // Remove playing class when audio ends
-    audio.onended = () => {
+    const name = soundName.toLowerCase();
+    
+    // Map sound names to effects
+    if (name.includes('engine') || name.includes('car') || name.includes('motorcycle') || name.includes('rev')) {
+        audioGen.generateEngineSound();
+    } else if (name.includes('explosion') || name.includes('crash') || name.includes('boom')) {
+        audioGen.generateExplosion();
+    } else if (name.includes('whoosh') || name.includes('woosh') || name.includes('passing')) {
+        audioGen.generateWhoosh();
+    } else if (name.includes('laugh') || name.includes('haha') || name.includes('lol')) {
+        audioGen.generateLaugh();
+    } else {
+        // Random effect for anything else
+        audioGen.generateRandomEffect();
+    }
+    
+    // Simulate sound end after a delay
+    setTimeout(() => {
         btn.classList.remove('playing');
-        btn.style.opacity = '1';
         currentlyPlaying = null;
-        nowPlaying.classList.add('hidden');
-    };
+        document.getElementById('nowPlaying').classList.add('hidden');
+    }, 1200);
 }
 
 // Stop sound
