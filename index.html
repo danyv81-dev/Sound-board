@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Board - 250+ Sounds</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🔊 SOUND BOARD</h1>
+            <p>250+ Sounds - Engine Room • ASMR • Memes • Music</p>
+            <div class="header-controls">
+                <input type="search" id="searchInput" class="search-box" placeholder="Search sounds...">
+                <div class="volume-control">
+                    <label for="masterVolume">Master Volume:</label>
+                    <input type="range" id="masterVolume" min="0" max="100" value="100">
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-btn active" data-section="engine">🏎️ Engine Room</button>
+            <button class="nav-btn" data-section="asmr">🎧 ASMR</button>
+            <button class="nav-btn" data-section="memes">😂 Memes</button>
+            <button class="nav-btn" data-section="music">🎵 Music</button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <!-- Engine Room Section -->
+            <section class="section active" data-section="engine">
+                <h2>🏎️ ENGINE ROOM</h2>
+                <div class="category-grid">
+                    <div class="category">
+                        <h3>🚗 Regular Cars</h3>
+                        <div class="sounds-grid" id="engine-cars"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🏍️ Motorcycles</h3>
+                        <div class="sounds-grid" id="engine-motorcycles"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🏁 F1 Racing</h3>
+                        <div class="sounds-grid" id="engine-f1"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🔥 Top Fuel</h3>
+                        <div class="sounds-grid" id="engine-topfuel"></div>
+                    </div>
+                    <div class="category">
+                        <h3>⚙️ Rotors</h3>
+                        <div class="sounds-grid" id="engine-rotors"></div>
+                    </div>
+                    <div class="category">
+                        <h3>💪 Muscle Cars</h3>
+                        <div class="sounds-grid" id="engine-muscle"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ASMR Section -->
+            <section class="section" data-section="asmr">
+                <h2>🎧 ASMR - Satisfying Sounds</h2>
+                <div class="category-grid">
+                    <div class="category">
+                        <h3>💧 Water & Rain</h3>
+                        <div class="sounds-grid" id="asmr-water"></div>
+                    </div>
+                    <div class="category">
+                        <h3>✂️ Cutting & Tapping</h3>
+                        <div class="sounds-grid" id="asmr-cutting"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🪴 Nature Sounds</h3>
+                        <div class="sounds-grid" id="asmr-nature"></div>
+                    </div>
+                    <div class="category">
+                        <h3>😴 Sleep & Relax</h3>
+                        <div class="sounds-grid" id="asmr-sleep"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🍽️ Eating & Cooking</h3>
+                        <div class="sounds-grid" id="asmr-cooking"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎨 Creative & Craft</h3>
+                        <div class="sounds-grid" id="asmr-craft"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Meme Space Section -->
+            <section class="section" data-section="memes">
+                <h2>😂 MEME SPACE - Funny Sounds</h2>
+                <div class="category-grid">
+                    <div class="category">
+                        <h3>😆 Classic Memes</h3>
+                        <div class="sounds-grid" id="memes-classic"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎬 Movie Quotes</h3>
+                        <div class="sounds-grid" id="memes-movies"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎮 Gaming Sounds</h3>
+                        <div class="sounds-grid" id="memes-gaming"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎪 Comedy & Laughs</h3>
+                        <div class="sounds-grid" id="memes-comedy"></div>
+                    </div>
+                    <div class="category">
+                        <h3>📱 Internet Culture</h3>
+                        <div class="sounds-grid" id="memes-internet"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎵 Meme Music</h3>
+                        <div class="sounds-grid" id="memes-music"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Music Section -->
+            <section class="section" data-section="music">
+                <h2>🎵 VIRAL & POPULAR MUSIC</h2>
+                <div class="category-grid">
+                    <div class="category">
+                        <h3>🔥 Hot Trending</h3>
+                        <div class="sounds-grid" id="music-trending"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎸 Rock & Metal</h3>
+                        <div class="sounds-grid" id="music-rock"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎤 Hip-Hop & Rap</h3>
+                        <div class="sounds-grid" id="music-hiphop"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎹 Electronic & EDM</h3>
+                        <div class="sounds-grid" id="music-electronic"></div>
+                    </div>
+                    <div class="category">
+                        <h3>🎺 Pop & Chart Hits</h3>
+                        <div class="sounds-grid" id="music-pop"></div>
+                    </div>
+                    <div class="category">
+                        <h3>😎 Cool & Chill</h3>
+                        <div class="sounds-grid" id="music-chill"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🎵 Sound Board - Play Responsibly | Total Sounds: <span id="soundCount">0</span></p>
+        </footer>
+    </div>
+
+    <!-- Audio Player -->
+    <div class="audio-player hidden" id="audioPlayer">
+        <audio id="audioElement" preload="auto"></audio>
+    </div>
+
+    <!-- Floating Now Playing -->
+    <div class="now-playing hidden" id="nowPlaying">
+        <span id="playingName">Now Playing: </span>
+        <button class="stop-btn" onclick="stopSound()">⏹ Stop</button>
+    </div>
+
+    <script src="sounds.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
