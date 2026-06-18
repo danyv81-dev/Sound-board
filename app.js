@@ -6,6 +6,7 @@ let masterVolume = 100;
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
+    initAudioGenerator();
     setupEventListeners();
     renderAllSounds();
     updateSoundCount();
@@ -87,29 +88,34 @@ function playSound(sound, btn) {
     audio.src = sound.url;
     audio.volume = masterVolume / 100;
     
-    try {
-        audio.play().catch(err => {
-            console.log('Audio playback error:', err);
-            showNotification('Unable to play sound. The audio file may not be available.');
-        });
-        
-        // Update UI
-        btn.classList.add('playing');
-        currentlyPlaying = { sound, id: btn.id };
-        
-        // Update now playing display
-        document.getElementById('playingName').textContent = `Now Playing: ${sound.name}`;
-        nowPlaying.classList.remove('hidden');
-        
-        // Remove playing class when audio ends
-        audio.onended = () => {
-            btn.classList.remove('playing');
-            currentlyPlaying = null;
-            nowPlaying.classList.add('hidden');
-        };
-    } catch (err) {
-        console.error('Error playing sound:', err);
+    // Update UI immediately
+    btn.classList.add('playing');
+    currentlyPlaying = { sound, id: btn.id };
+    document.getElementById('playingName').textContent = `Now Playing: ${sound.name}`;
+    nowPlaying.classList.remove('hidden');
+    
+    // Try to play with better error handling
+    const playPromise = audio.play();
+    
+    if (playPromise !== undefined) {
+        playPromise
+            .then(() => {
+                console.log('Playing: ' + sound.name);
+            })
+            .catch(err => {
+                console.log('Playback error:', err);
+                // Keep UI updated even if sound fails to load
+                btn.style.opacity = '0.7';
+            });
     }
+    
+    // Remove playing class when audio ends
+    audio.onended = () => {
+        btn.classList.remove('playing');
+        btn.style.opacity = '1';
+        currentlyPlaying = null;
+        nowPlaying.classList.add('hidden');
+    };
 }
 
 // Stop sound
